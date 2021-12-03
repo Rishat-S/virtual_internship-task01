@@ -1,13 +1,13 @@
 package ru.studre;
 
-import ru.studre.repository.CityRepository;
+import ru.studre.service.CityService;
 
 import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        CityRepository cityRepository = new CityRepository();
+        CityService cityService = new CityService();
 
-        cityRepository.getCities().forEach(System.out::println);
+        cityService.getCities().forEach(System.out::println);
     }
 }

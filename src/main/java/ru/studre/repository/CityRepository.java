@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static ru.studre.repository.Constants.CITY_DIRECTORY_FILE_PATH;
+import static ru.studre.constants.Constants.CITY_DIRECTORY_FILE_PATH;
 
 public class CityRepository {
     private final List<City> cities;
