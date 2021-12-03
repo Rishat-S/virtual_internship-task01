@@ -28,22 +28,30 @@ public class CityRepository {
                 new InputStreamReader(new FileInputStream(CITY_DIRECTORY_FILE_PATH)));
 
         while (true) {
-            String[] dataLineOfCsvFile = bufferedReader.readLine().split(";");
 
-            if (dataLineOfCsvFile.length == 0) {
+            String[] dataLineOfCsvFile;
+            try {
+                dataLineOfCsvFile = bufferedReader.readLine().split(";");
+            } catch (NullPointerException e) {
+                e.printStackTrace();
                 break;
             }
 
-            cities.add(
-                    new City(
-                            Long.parseLong(dataLineOfCsvFile[0]),
-                            dataLineOfCsvFile[1],
-                            dataLineOfCsvFile[2],
-                            dataLineOfCsvFile[3],
-                            Integer.parseInt(dataLineOfCsvFile[4]),
-                            dataLineOfCsvFile[5]
-                    )
-            );
+            try {
+                cities.add(
+                        new City(
+                                Long.parseLong(dataLineOfCsvFile[0]),
+                                dataLineOfCsvFile[1],
+                                dataLineOfCsvFile[2],
+                                dataLineOfCsvFile[3],
+                                Integer.parseInt(dataLineOfCsvFile[4]),
+                                dataLineOfCsvFile[5]
+                        )
+                );
+            } catch (IndexOutOfBoundsException e) {
+                System.out.println(Arrays.toString(dataLineOfCsvFile));
+                e.printStackTrace();
+            }
         }
         return cities;
     }
