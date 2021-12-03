@@ -20,18 +20,20 @@ public class CityRepository {
         return getCitiesFromCsvFile(cityDirectoryFilePath);
     }
 
-    private Set<City> getCitiesFromCsvFile(String cityDirectoryFilePath) throws IOException {
-        BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(cityDirectoryFilePath)));
-
-        while (true) {
-            String[] dataLineOfCsvFile;
-            try {
-                dataLineOfCsvFile = bufferedReader.readLine().split(";");
-            } catch (NullPointerException e) {
-                break;
+    private Set<City> getCitiesFromCsvFile(String cityDirectoryFilePath) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(new FileInputStream(cityDirectoryFilePath)));){
+            while (true) {
+                String[] dataLineOfCsvFile;
+                try {
+                    dataLineOfCsvFile = bufferedReader.readLine().split(";");
+                } catch (NullPointerException e) {
+                    break;
+                }
+                addCityToSet(dataLineOfCsvFile);
             }
-            addCityToSet(dataLineOfCsvFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return cities;
