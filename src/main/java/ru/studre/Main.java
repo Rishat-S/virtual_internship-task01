@@ -8,6 +8,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         CityRepository cityRepository = new CityRepository();
 
-        System.out.println(cityRepository.getCities());
+        cityRepository.getCities().forEach(System.out::println);
     }
 }

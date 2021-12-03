@@ -27,13 +27,15 @@ public class CityRepository {
         BufferedReader bufferedReader = new BufferedReader(
                 new InputStreamReader(new FileInputStream(CITY_DIRECTORY_FILE_PATH)));
 
+        System.out.println("Begin read the file...");
+
         while (true) {
 
             String[] dataLineOfCsvFile;
             try {
                 dataLineOfCsvFile = bufferedReader.readLine().split(";");
             } catch (NullPointerException e) {
-                e.printStackTrace();
+                System.out.println("End read the file");
                 break;
             }
 
