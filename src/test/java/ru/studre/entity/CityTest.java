@@ -1,6 +1,5 @@
 package ru.studre.entity;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +16,7 @@ class CityTest {
                 12248,
                 "1973");
 
-        Assertions.assertEquals(
+        assertEquals(
                 "City{name='Адыгейск', region='Адыгея', district='Южный', population=12248, foundation='1973'}",
                 city.toString());
     }
