@@ -1,0 +1,17 @@
+### IntelliJ IDEA ###
+.idea
+out/
+*.iws
+*.iml
+*.ipr
+
+
+### Package Files ###
+target/
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
