@@ -39,7 +39,9 @@ public class City {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         City city = (City) o;
-        return Objects.equals(id, city.id) && Objects.equals(name, city.name) && Objects.equals(region, city.region) && Objects.equals(district, city.district) && Objects.equals(population, city.population) && Objects.equals(foundation, city.foundation);
+        return Objects.equals(id, city.id) && Objects.equals(name, city.name) && Objects.equals(region, city.region)
+                && Objects.equals(district, city.district) && Objects.equals(population, city.population)
+                && Objects.equals(foundation, city.foundation);
     }
 
     @Override
