@@ -10,9 +10,6 @@ public class City {
     private Integer population;
     private String foundation;
 
-    public City() {
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
