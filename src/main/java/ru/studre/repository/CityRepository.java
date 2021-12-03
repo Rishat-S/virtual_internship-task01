@@ -6,55 +6,51 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import static ru.studre.constants.Constants.CITY_DIRECTORY_FILE_PATH;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CityRepository {
-    private final List<City> cities;
+    private final Set<City> cities;
 
     public CityRepository() {
-        cities = new ArrayList<>();
+        cities = new HashSet<>();
     }
 
-    public List<City> getCities() throws IOException {
-        return getCitiesFromCsvFile();
+    public Set<City> getCities(String cityDirectoryFilePath) throws IOException {
+        return getCitiesFromCsvFile(cityDirectoryFilePath);
     }
 
-    private List<City> getCitiesFromCsvFile() throws IOException {
+    private Set<City> getCitiesFromCsvFile(String cityDirectoryFilePath) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(
-                new InputStreamReader(new FileInputStream(CITY_DIRECTORY_FILE_PATH)));
-
-        System.out.println("Begin read the file...");
+                new InputStreamReader(new FileInputStream(cityDirectoryFilePath)));
 
         while (true) {
-
             String[] dataLineOfCsvFile;
             try {
                 dataLineOfCsvFile = bufferedReader.readLine().split(";");
             } catch (NullPointerException e) {
-                System.out.println("End read the file");
                 break;
             }
-
-            try {
-                cities.add(
-                        new City(
-                                Long.parseLong(dataLineOfCsvFile[0]),
-                                dataLineOfCsvFile[1],
-                                dataLineOfCsvFile[2],
-                                dataLineOfCsvFile[3],
-                                Integer.parseInt(dataLineOfCsvFile[4]),
-                                dataLineOfCsvFile[5]
-                        )
-                );
-            } catch (IndexOutOfBoundsException e) {
-                System.out.println(Arrays.toString(dataLineOfCsvFile));
-                e.printStackTrace();
-            }
+            addCityToSet(dataLineOfCsvFile);
         }
+
         return cities;
+
     }
+
+    private void addCityToSet(String[] dataLineOfCsvFile) {
+        City city = new City();
+        city.setId(Long.parseLong(dataLineOfCsvFile[0]));
+        city.setName(dataLineOfCsvFile[1]);
+        city.setRegion(dataLineOfCsvFile[2]);
+        city.setDistrict(dataLineOfCsvFile[3]);
+        city.setPopulation(Integer.parseInt(dataLineOfCsvFile[4]));
+        if (dataLineOfCsvFile.length == 6) {
+            city.setFoundation(dataLineOfCsvFile[5]);
+        }
+
+        cities.add(city);
+
+    }
+
 }
