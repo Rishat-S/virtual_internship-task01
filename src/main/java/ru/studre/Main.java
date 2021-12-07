@@ -4,6 +4,9 @@ import ru.studre.entity.City;
 import ru.studre.service.CityService;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static ru.studre.constants.Constants.CITY_DIRECTORY_FILE_PATH;
 
@@ -11,22 +14,16 @@ public class Main {
     public static void main(String[] args) throws IOException {
         CityService cityService = new CityService();
 
-        /* Третье задание */
-        getCityWithMaxPopulation(cityService);
-
+        /* Четвёртое задание */
+        countCityByRegion(cityService);
     }
 
-    private static void getCityWithMaxPopulation(CityService cityService) throws IOException {
-        City[] cities = cityService.getCities(CITY_DIRECTORY_FILE_PATH).toArray(City[]::new);
-
-        Integer maxPopulation = cities[0].getPopulation();
-        int indexOfCityWithMaxPopulation = 0;
-        for (int i = 1; i < cities.length; i++) {
-            if (cities[i].getPopulation() > maxPopulation) {
-                maxPopulation = cities[i].getPopulation();
-                indexOfCityWithMaxPopulation = i;
-            }
+    private static void countCityByRegion(CityService cityService) throws IOException {
+        Map<String, List<City>> stringListMap = cityService.getCities(CITY_DIRECTORY_FILE_PATH).stream()
+                .collect(Collectors.groupingBy(City::getRegion));
+        for (Map.Entry<String, List<City>> pair: stringListMap.entrySet()) {
+            System.out.println(pair.getKey() + "-" + pair.getValue().size());
         }
-        System.out.println("[" + indexOfCityWithMaxPopulation + "]" + "=" + maxPopulation);
     }
+
 }
